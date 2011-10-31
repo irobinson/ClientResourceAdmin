@@ -1,0 +1,65 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="ClientResourceAdmin" type="Module" version="00.0.01">
+      <friendlyName>ClientResourceAdmin</friendlyName>
+      <description></description>
+      <owner>
+        <name>Ian Robinson</name>
+        <url>http://github.com/irobinson</url>
+      </owner>
+      
+      <license src="License.txt"/>
+      <releaseNotes src="ReleaseNotes.txt" />
+
+      <dependencies>
+        <dependency type="CoreVersion">06.01.00</dependency>
+      </dependencies>
+
+      <components>
+        
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/ClientResourceAdmin</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>ClientResourceAdmin</moduleName>
+            <foldername>ClientResourceAdmin</foldername>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>ClientResourceAdmin</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/ClientResourceAdmin/ClientResourceAdmin.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <basePath>bin</basePath>
+            <assembly>
+              <name>ClientResourceAdmin.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+       
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

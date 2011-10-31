@@ -3,6 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientResourceAdmin", "ClientResourceAdmin.csproj", "{39718C57-6E9A-4D13-8EA4-53CCBF949275}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{3EA880A8-557A-4754-B5BC-AD6A25829FAD}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\DotNetNuke.dll = Dependencies\DotNetNuke.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildScripts", "BuildScripts", "{704E7ADC-D2EC-4030-A992-9BC2A62DBF1F}"
+	ProjectSection(SolutionItems) = preProject
+		BuildScripts\ModulePackage.targets = BuildScripts\ModulePackage.targets
+		BuildScripts\MSBuild.Community.Tasks.Targets = BuildScripts\MSBuild.Community.Tasks.Targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

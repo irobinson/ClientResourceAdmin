@@ -1,0 +1,2 @@
+﻿<h3>v00.00.01 - October 31, 2011</h3>
+<p>Bare bones "super alpha" release. Support for reading the current version and enabling/disabling: composite files, CSS/JS minification, file persistence, and changing the URL type.</p>

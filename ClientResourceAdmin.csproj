@@ -62,9 +62,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\ClientResourceAdmin.ascx.resx" />
+    <Content Include="License.txt" />
+    <Content Include="ReleaseNotes.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientResourceAdmin.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClientResourceAdmin.dnn" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -87,11 +92,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <PropertyGroup>
+    <Extension>zip</Extension>
+    <DNNFileName>ClientResourceAdmin</DNNFileName>
+    <PackageName>ClientResourceAdmin</PackageName>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\BuildScripts</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+  <Import Project="BuildScripts\ModulePackage.Targets" />
+  <Target Name="AfterBuild" DependsOnTargets="PackageModule">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
