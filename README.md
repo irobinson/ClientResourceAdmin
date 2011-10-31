@@ -3,6 +3,14 @@
 
 This is an administrative module for DNN 6.1 that provides a user interface for key settings for managing CSS/JS resources. It allows a DNN SuperUser to update their web.config through the UI instead of editing the web.config by hand.
 
+Installation
+------------
+Download the latest installable module package from the "ModulePackages" folder. Both Install and Source are installable through the DNN UI, Source just includes the C# code-behind.
+
+Usage
+-----
+Caution: clicking save in the module will update your web.config and restart your website. Please plan accordingly.
+
 Blog posts
 ----------
 * [Enhancements for working with JavaScript and CSS Files in DNN 6.1][crm]
