@@ -9,7 +9,6 @@ Url type:
 <asp:DropDownList runat="server" ID="UrlTypeList">
     <asp:ListItem Selected="True">MappedId</asp:ListItem>
     <asp:ListItem>Base64QueryStrings</asp:ListItem>
-    <asp:ListItem>Base64Paths</asp:ListItem>
 </asp:DropDownList><br/>
 
 <asp:LinkButton runat="server" ID="SaveButton" >Save</asp:LinkButton>
