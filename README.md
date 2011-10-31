@@ -5,13 +5,13 @@ This is an administrative module for DNN 6.1 that provides a user interface for 
 
 Blog posts
 ----------
-[Enhancements for working iwth JavaScript and CSS Files in DNN 6.1][crm]
-[DNN 6.1 JS/CSS File Combination Potential Gotchas][crmpg]
+* [Enhancements for working with JavaScript and CSS Files in DNN 6.1][crm]
+* [DNN 6.1 JS/CSS File Combination Potential Gotchas][crmpg]
 
 Documentation
 -------------
-[DNN Client Resource Management API][dnncrmwiki]
-[Client Dependency Framework][cdfwiki]
+* [DNN Client Resource Management API][dnncrmwiki]
+* [Client Dependency Framework][cdfwiki]
 
 [crm]: http://www.dotnetnuke.com/Resources/Blogs/EntryId/3191/Enhancements-for-working-with-JavaScript-and-CSS-files-in-DNN-6-1.aspx
 [crmpg]: http://www.dotnetnuke.com/Resources/Blogs/EntryId/3207/DNN-6-1-JS-CSS-File-Combination-Potential-Gotchas.aspx
