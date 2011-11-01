@@ -35,4 +35,5 @@
 	</fieldset>
 </div>
 
-<asp:LinkButton runat="server" ID="SaveButton" ResourceKey="SaveButton" CssClass="dnnPrimaryAction"></asp:LinkButton>
+<asp:LinkButton runat="server" ID="SaveButton" ResourceKey="SaveButton" CssClass="dnnPrimaryAction" />
+<asp:LinkButton runat="server" ID="IncrementVersionButton" ResourceKey="IncrementVersionButton" CssClass="dnnSecondaryAction" />

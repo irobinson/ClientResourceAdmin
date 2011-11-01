@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ClientResourceAdmin" type="Module" version="00.0.01">
+    <package name="ClientResourceAdmin" type="Module" version="00.0.02">
       <friendlyName>ClientResourceAdmin</friendlyName>
       <description></description>
       <owner>

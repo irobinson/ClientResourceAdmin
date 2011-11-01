@@ -10,17 +10,21 @@
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Services.Localization;
     using DotNetNuke.UI.Skins.Controls;
+    using DotNetNuke.Web.Client.ClientResourceManagement;
 
     public partial class ClientResourceAdmin : PortalModuleBase
     {
         protected override void OnInit(EventArgs e)
         {
             this.SaveButton.Click += Save;
+            this.IncrementVersionButton.Click += IncrementVersion;
             this.Load += PageLoad;
         }
 
         protected void PageLoad(object sender, EventArgs e)
         {
+            ValidateSuperUser();
+
             if (!this.Page.IsPostBack)
             {
                 SetCurrentSettings();
@@ -43,12 +47,24 @@
                 var merge = new DotNetNuke.Services.Installer.XmlMerge(doc, Globals.FormatVersion(app.Version), app.Description);
                 merge.UpdateConfigs();
 
-                DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("Success.Text", this.LocalResourceFile), ModuleMessage.ModuleMessageType.GreenSuccess);
+                ShowSuccessMsg();
             }
             catch (Exception ex)
             {
-                DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("Error.Text", this.LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
-                Exceptions.LogException(ex);
+                ShowErrorAndLogException(ex);
+            }
+        }
+
+        protected void IncrementVersion(object sender, EventArgs e)
+        {
+            try
+            {
+                ClientResourceManager.UpdateVersion();
+                ShowSuccessMsg();
+            }
+            catch (Exception ex)
+            {
+                ShowErrorAndLogException(ex);
             }
         }
 
@@ -73,7 +89,7 @@
             }
         }
 
-        public void SetCurrentSettings()
+        private void SetCurrentSettings()
         {
             XPathNavigator config = Config.Load().CreateNavigator();
             XPathNavigator clientDependencyNode = config.SelectSingleNode("/configuration/clientDependency");
@@ -98,6 +114,18 @@
                 this.PersistFiles.Checked = persistFiles;
                 this.UrlTypeList.SelectedValue = urlType;
             }
+        }
+
+        private void ShowSuccessMsg()
+        {
+            var message = string.Format(Localization.GetString("Success.Text", this.LocalResourceFile), Globals.NavigateURL());
+            DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message, ModuleMessage.ModuleMessageType.GreenSuccess);
+        }
+
+        private void ShowErrorAndLogException(Exception ex)
+        {
+            DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("Error.Text", this.LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
+            Exceptions.LogException(ex);
         }
     }
 }
