@@ -72,11 +72,12 @@
         {
             string xml = Localization.GetString("Basic.Text", this.LocalResourceFile);
             xml = string.Format(xml,
-                this.EnableCompositeFiles.Checked.ToString().ToLower(), // {0}
-                this.MinifyCss.Checked.ToString().ToLower(), // {1}
-                this.MinifyJs.Checked.ToString().ToLower(), // {2}
-                this.PersistFiles.Checked.ToString().ToLower(), // {3}
-                this.UrlTypeList.SelectedValue
+                this.Version.Text, // {0}
+                this.EnableCompositeFiles.Checked.ToString().ToLower(), // {1}
+                this.MinifyCss.Checked.ToString().ToLower(), // {2}
+                this.MinifyJs.Checked.ToString().ToLower(), // {3}
+                this.PersistFiles.Checked.ToString().ToLower(), // {4}
+                this.UrlTypeList.SelectedValue // {5}
                 );
             return xml;
         }
