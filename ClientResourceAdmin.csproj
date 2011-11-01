@@ -67,8 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\ClientResourceAdmin.ascx.resx" />
-    <Content Include="License.txt" />
-    <Content Include="ReleaseNotes.txt" />
+    <Content Include="License.html" />
+    <Content Include="ReleaseNotes.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientResourceAdmin.ascx" />

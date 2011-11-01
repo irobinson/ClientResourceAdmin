@@ -67,11 +67,11 @@
       <Output TaskParameter="Include" ItemName="SqlDataProviderFiles" />
     </CreateItem>
 
-    <CreateItem Include="**\License.txt">
+    <CreateItem Include="**\License.html">
       <Output TaskParameter="Include" ItemName="PackageTxtFiles" />
     </CreateItem>
 
-    <CreateItem Include="**\ReleaseNotes.txt">
+    <CreateItem Include="**\ReleaseNotes.html">
       <Output TaskParameter="Include" ItemName="PackageTxtFiles" />
     </CreateItem>
 
