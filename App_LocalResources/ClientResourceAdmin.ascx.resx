@@ -143,6 +143,12 @@
   &lt;/nodes&gt;
 &lt;/configuration&gt;</value>
   </data>
+  <data name="CompositeFilesLabel.Help" xml:space="preserve">
+    <value>Composite files are created to reduce the number of files requested by the client, if disabled, versioning will still take place, but the request reduction benefit will be lost.</value>
+  </data>
+  <data name="CompositeFilesLabel.Text" xml:space="preserve">
+    <value>Enable composite files</value>
+  </data>
   <data name="Error.Text" xml:space="preserve">
     <value>Woops, something went wrong.</value>
   </data>
@@ -186,7 +192,44 @@
                   {14} url type
                 */</comment>
   </data>
+  <data name="Intro.Text" xml:space="preserve">
+    <value>This page allows you to configure the Client Resource Management settings. If you are in a load-balanced environment please make sure that Url type is set to Base64QueryStrings. It is recommended to enable composite files and also to enable minification of CSS and JavaScript. To disable composite files for debugging purposes, simple set the web config's debug mode to "true."</value>
+  </data>
+  <data name="MinifyCssLabel.Help" xml:space="preserve">
+    <value>CSS minification will be performed upon file combination. Uses custom regular expressions to remove comments, whitespace and "dead css" to reduce file size.</value>
+  </data>
+  <data name="MinifyCssLabel.Text" xml:space="preserve">
+    <value>Minify CSS</value>
+  </data>
+  <data name="MinifyJsLabel.Help" xml:space="preserve">
+    <value>JS minification will be performed upon file combination. Uses JSMin.</value>
+  </data>
+  <data name="MinifyJsLabel.Text" xml:space="preserve">
+    <value>Minify JS</value>
+  </data>
+  <data name="PersistFilesLabel.Help" xml:space="preserve">
+    <value>Persist files will save the combined files in the file system across application restarts. Deleting the files from the file system or incrementing the version are the only way to clear them from the cache.</value>
+  </data>
+  <data name="PersistFilesLabel.Text" xml:space="preserve">
+    <value>Persist Files</value>
+  </data>
+  <data name="SaveButton.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Success.Text" xml:space="preserve">
     <value>Settings applied successfully.</value>
+  </data>
+  <data name="UrlTypeLabel.Help" xml:space="preserve">
+    <value>Base64QueryStrings is generally the safest option. MappedId's lead to prettier URLs, but will not work well in a load balanced environment.</value>
+  </data>
+  <data name="UrlTypeLabel.Text" xml:space="preserve">
+    <value>URL Type</value>
+  </data>
+  <data name="VersionLabel.Help" xml:space="preserve">
+    <value>The current version of client resources on this server. This version is incremented when an extension is installed, portal.css is updated, or when the cache is cleared. 
+Incrementing the version simply re-creates the combined files (if enabled) and forces the client's browser to download the new version of the files (whether combining is enabled or not).</value>
+  </data>
+  <data name="VersionLabel.Text" xml:space="preserve">
+    <value>Current Version</value>
   </data>
 </root>
