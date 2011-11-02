@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ClientResourceAdmin" type="Module" version="00.0.02">
+    <package name="ClientResourceAdmin" type="Module" version="00.0.03">
       <friendlyName>Client Resource Admin</friendlyName>
       <description>This is an administrative module for DNN 6.1 that provides a user interface for key settings for managing CSS/JS resources. It allows a DNN SuperUser to update their web.config through the UI instead of editing the web.config by hand.</description>
       <owner>

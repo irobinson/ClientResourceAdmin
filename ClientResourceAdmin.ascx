@@ -9,6 +9,10 @@
 		    <dnn:Label runat="server" ResourceKey="VersionLabel"/>
             <asp:Label runat="server" ID="Version" />
 		</div>
+        <div class="dnnFormItem" runat="server" id="LoggerRow">
+		    <dnn:Label runat="server" ResourceKey="LoggerLabel"/>
+            <asp:Label runat="server" ID="Logger" />
+		</div>
 		<div class="dnnFormItem">
             <dnn:Label runat="server" ResourceKey="CompositeFilesLabel"/>
             <asp:CheckBox runat="server" ID="EnableCompositeFiles" />
