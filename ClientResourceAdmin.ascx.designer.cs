@@ -22,6 +22,24 @@ namespace ClientResourceAdmin {
         protected global::System.Web.UI.WebControls.Label Version;
         
         /// <summary>
+        /// LoggerRow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggerRow;
+        
+        /// <summary>
+        /// Logger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Logger;
+        
+        /// <summary>
         /// EnableCompositeFiles control.
         /// </summary>
         /// <remarks>

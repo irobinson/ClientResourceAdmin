@@ -27,7 +27,7 @@
 
             if (!this.Page.IsPostBack)
             {
-                SetCurrentSettings();
+                UpdateView();
             }
         }
 
@@ -41,7 +41,7 @@
             try
             {
                 var doc = new XmlDocument();
-                var xml = UpdateValues();
+                var xml = GetNewConfig();
                 doc.LoadXml(xml);
                 Application app = DotNetNukeContext.Current.Application;
                 var merge = new DotNetNuke.Services.Installer.XmlMerge(doc, Globals.FormatVersion(app.Version), app.Description);
@@ -68,7 +68,7 @@
             }
         }
 
-        private string UpdateValues()
+        private string GetNewConfig()
         {
             string xml = Localization.GetString("Basic.Text", this.LocalResourceFile);
             xml = string.Format(xml,
@@ -77,20 +77,13 @@
                 this.MinifyCss.Checked.ToString().ToLower(), // {2}
                 this.MinifyJs.Checked.ToString().ToLower(), // {3}
                 this.PersistFiles.Checked.ToString().ToLower(), // {4}
-                this.UrlTypeList.SelectedValue // {5}
+                this.UrlTypeList.SelectedValue, // {5}
+                this.Logger.Text // {6}
                 );
             return xml;
         }
 
-        private void ValidateSuperUser()
-        {
-            if (!UserInfo.IsSuperUser)
-            {
-                Response.Redirect(Globals.NavigateURL("Access Denied"), true);
-            }
-        }
-
-        private void SetCurrentSettings()
+        private void UpdateView()
         {
             XPathNavigator config = Config.Load().CreateNavigator();
             XPathNavigator clientDependencyNode = config.SelectSingleNode("/configuration/clientDependency");
@@ -101,6 +94,7 @@
                 XPathNavigator fileRegistrationProvider = config.SelectSingleNode("configuration/clientDependency/fileRegistration/providers/add");
                 
                 int version = XmlUtils.GetAttributeValueAsInteger(clientDependencyNode, "version", 0);
+                string loggerType = XmlUtils.GetAttributeValue(clientDependencyNode, "loggerType");
 
                 bool compositeFiles = XmlUtils.GetAttributeValueAsBoolean(fileRegistrationProvider, "enableCompositeFiles", true);
                 bool minifyCss = XmlUtils.GetAttributeValueAsBoolean(fileProcessingProvider, "enableCssMinify", false);
@@ -114,6 +108,9 @@
                 this.MinifyJs.Checked = minifyJs;
                 this.PersistFiles.Checked = persistFiles;
                 this.UrlTypeList.SelectedValue = urlType;
+                this.Logger.Text = loggerType;
+
+                this.LoggerRow.Visible = !string.IsNullOrEmpty(loggerType);
             }
         }
 
@@ -127,6 +124,14 @@
         {
             DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("Error.Text", this.LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
             Exceptions.LogException(ex);
+        }
+
+        private void ValidateSuperUser()
+        {
+            if (!UserInfo.IsSuperUser)
+            {
+                Response.Redirect(Globals.NavigateURL("Access Denied"), true);
+            }
         }
     }
 }
