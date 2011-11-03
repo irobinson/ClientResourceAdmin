@@ -148,6 +148,12 @@
   <data name="CompositeFilesLabel.Text" xml:space="preserve">
     <value>Enable composite files</value>
   </data>
+  <data name="ConfigurationUpdate.Message" xml:space="preserve">
+    <value>The ClientDependency configuration has been updated through the Client Resource Admin. This triggered an application restart. The following values were saved: {0}</value>
+  </data>
+  <data name="ConfigurationUpdate.Title" xml:space="preserve">
+    <value>ClientDependency Configuration Update</value>
+  </data>
   <data name="Error.Text" xml:space="preserve">
     <value>Woops, something went wrong.</value>
   </data>
@@ -196,6 +202,12 @@
   </data>
   <data name="UrlTypeLabel.Text" xml:space="preserve">
     <value>URL Type</value>
+  </data>
+  <data name="VersionIncremented.Message" xml:space="preserve">
+    <value>The ClientDependency version was incremented through the Client Resource Admin module. This triggered an application restart.</value>
+  </data>
+  <data name="VersionIncremented.Title" xml:space="preserve">
+    <value>ClientDependency Version Incremented</value>
   </data>
   <data name="VersionLabel.Help" xml:space="preserve">
     <value>The current version of client resources on this server. This version is incremented when an extension is installed, portal.css is updated, or when the cache is cleared. 

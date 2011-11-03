@@ -1,6 +1,7 @@
 ﻿namespace ClientResourceAdmin
 {
     using System;
+    using System.Text;
     using System.Xml;
     using System.Xml.XPath;
     using DotNetNuke.Application;
@@ -9,6 +10,7 @@
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Services.Localization;
+    using DotNetNuke.Services.Log.EventLog;
     using DotNetNuke.UI.Skins.Controls;
     using DotNetNuke.Web.Client.ClientResourceManagement;
 
@@ -48,6 +50,7 @@
                 merge.UpdateConfigs();
 
                 ShowSuccessMsg();
+                LogHostAlertToEventViewer(LocalizeString("ConfigurationUpdate.Title"), string.Format(LocalizeString("ConfigurationUpdate.Message"), GetFormValuesAsString()));
             }
             catch (Exception ex)
             {
@@ -55,11 +58,23 @@
             }
         }
 
+        private string GetFormValuesAsString()
+        {
+            var values = new StringBuilder();
+            values.Append("Enable Composite files: " + this.EnableCompositeFiles.Checked.ToString().ToLower() + ", ");
+            values.Append("Minify CSS: " + this.MinifyCss.Checked.ToString().ToLower() + ", ");
+            values.Append("Minify JS: " + this.MinifyJs.Checked.ToString().ToLower() + ", ");
+            values.Append("Persist Files:" + this.PersistFiles.Checked.ToString().ToLower() + ", ");
+            values.Append("Url Type: " + this.UrlTypeList.SelectedValue + ".");
+            return values.ToString();
+        }
+
         protected void IncrementVersion(object sender, EventArgs e)
         {
             try
             {
                 ClientResourceManager.UpdateVersion();
+                LogHostAlertToEventViewer(LocalizeString("VersionIncremented.Title"), LocalizeString("VersionIncremented.Message"));
                 ShowSuccessMsg();
             }
             catch (Exception ex)
@@ -112,6 +127,11 @@
 
                 this.LoggerRow.Visible = !string.IsNullOrEmpty(loggerType);
             }
+        }
+
+        private void LogHostAlertToEventViewer(string title, string message)
+        {
+            new EventLogController().AddLog(title, message, this.PortalSettings, this.UserId, EventLogController.EventLogType.HOST_ALERT);
         }
 
         private void ShowSuccessMsg()
