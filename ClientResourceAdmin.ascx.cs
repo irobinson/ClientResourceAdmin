@@ -25,11 +25,18 @@
 
         protected void PageLoad(object sender, EventArgs e)
         {
-            ValidateSuperUser();
-
-            if (!this.Page.IsPostBack)
+            try
             {
-                UpdateView();
+                ValidateSuperUser();
+
+                if (!this.Page.IsPostBack)
+                {
+                    UpdateView();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowErrorAndLogException(ex);
             }
         }
 
@@ -103,29 +110,55 @@
             XPathNavigator config = Config.Load().CreateNavigator();
             XPathNavigator clientDependencyNode = config.SelectSingleNode("/configuration/clientDependency");
 
-            if (clientDependencyNode != null)
-            {
-                XPathNavigator fileProcessingProvider = config.SelectSingleNode("configuration/clientDependency/compositeFiles/fileProcessingProviders/add");
-                XPathNavigator fileRegistrationProvider = config.SelectSingleNode("configuration/clientDependency/fileRegistration/providers/add");
-                
-                int version = XmlUtils.GetAttributeValueAsInteger(clientDependencyNode, "version", 0);
-                string loggerType = XmlUtils.GetAttributeValue(clientDependencyNode, "loggerType");
+            if (clientDependencyNode == null)
+                return;
 
+            XPathNavigator fileProcessingProvider = config.SelectSingleNode("configuration/clientDependency/compositeFiles/fileProcessingProviders/add");
+            XPathNavigator fileRegistrationProvider = config.SelectSingleNode("configuration/clientDependency/fileRegistration/providers/add");
+                
+            int version = XmlUtils.GetAttributeValueAsInteger(clientDependencyNode, "version", 0);
+            string loggerType = XmlUtils.GetAttributeValue(clientDependencyNode, "loggerType");
+
+            this.Version.Text = version.ToString();
+            this.Logger.Text = loggerType;
+            this.LoggerRow.Visible = !string.IsNullOrEmpty(loggerType);
+
+            if (fileRegistrationProvider == null)
+            {
+                this.ShowErrorAndLogException(new NullReferenceException(LocalizeString("ErrorFileRegistration.Text")));
+                this.EnableCompositeFiles.Enabled = false;
+            }
+            else
+            {
                 bool compositeFiles = XmlUtils.GetAttributeValueAsBoolean(fileRegistrationProvider, "enableCompositeFiles", true);
+                this.EnableCompositeFiles.Checked = compositeFiles;
+                this.EnableCompositeFiles.Enabled = true;
+            }
+
+            if (fileProcessingProvider == null)
+            {
+                this.ShowErrorAndLogException(new NullReferenceException(LocalizeString("ErrorFileProcessing.Text")));
+                this.MinifyCss.Enabled = false;
+                this.MinifyJs.Enabled = false;
+                this.PersistFiles.Enabled = false;
+                this.UrlTypeList.Enabled = false;
+            }
+            else
+            {
                 bool minifyCss = XmlUtils.GetAttributeValueAsBoolean(fileProcessingProvider, "enableCssMinify", false);
                 bool minifyJs = XmlUtils.GetAttributeValueAsBoolean(fileProcessingProvider, "enableJsMinify", true);
                 bool persistFiles = XmlUtils.GetAttributeValueAsBoolean(fileProcessingProvider, "persistFiles", true);
                 string urlType = XmlUtils.GetAttributeValue(fileProcessingProvider, "urlType");
 
-                this.Version.Text = version.ToString();
-                this.EnableCompositeFiles.Checked = compositeFiles;
+                this.MinifyCss.Enabled = true;
+                this.MinifyJs.Enabled = true;
+                this.PersistFiles.Enabled = true;
+                this.UrlTypeList.Enabled = true;
+
                 this.MinifyCss.Checked = minifyCss;
                 this.MinifyJs.Checked = minifyJs;
                 this.PersistFiles.Checked = persistFiles;
                 this.UrlTypeList.SelectedValue = urlType;
-                this.Logger.Text = loggerType;
-
-                this.LoggerRow.Visible = !string.IsNullOrEmpty(loggerType);
             }
         }
 
@@ -142,7 +175,7 @@
 
         private void ShowErrorAndLogException(Exception ex)
         {
-            DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("Error.Text", this.LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
+            DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("Error.Text", this.LocalResourceFile) + ex.Message, ModuleMessage.ModuleMessageType.RedError);
             Exceptions.LogException(ex);
         }
 

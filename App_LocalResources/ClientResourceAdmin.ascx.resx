@@ -155,7 +155,13 @@
     <value>ClientDependency Configuration Update</value>
   </data>
   <data name="Error.Text" xml:space="preserve">
-    <value>Woops, something went wrong.</value>
+    <value>Woops, something went wrong: </value>
+  </data>
+  <data name="ErrorFileProcessing.Text" xml:space="preserve">
+    <value>Unable to retrieve the ClientDependency file processing provider section from the web.config. Corresponding admin functions have been disabled.</value>
+  </data>
+  <data name="ErrorFileRegistration.Text" xml:space="preserve">
+    <value>Unable to retrieve the ClientDependency file registration provider section from the web.config. Corresponding admin functions have been disabled.</value>
   </data>
   <data name="IncrementVersionButton.Text" xml:space="preserve">
     <value>Increment Version</value>
