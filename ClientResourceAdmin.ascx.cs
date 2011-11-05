@@ -4,15 +4,18 @@
     using System.Text;
     using System.Xml;
     using System.Xml.XPath;
+
     using DotNetNuke.Application;
-    using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
+    using DotNetNuke.Framework;
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Services.Localization;
     using DotNetNuke.Services.Log.EventLog;
     using DotNetNuke.UI.Skins.Controls;
+    using DotNetNuke.UI.Utilities;
     using DotNetNuke.Web.Client.ClientResourceManagement;
+    using Globals = DotNetNuke.Common.Globals;
 
     public partial class ClientResourceAdmin : PortalModuleBase
     {
@@ -31,6 +34,9 @@
 
                 if (!this.Page.IsPostBack)
                 {
+                    ClientAPI.RegisterClientReference(this.Page, ClientAPI.ClientNamespaceReferences.dnn); 
+                    jQuery.RequestDnnPluginsRegistration();
+                    IntroLabel.Text = LocalizeString("Intro.Text");
                     UpdateView();
                 }
             }

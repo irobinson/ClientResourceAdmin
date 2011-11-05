@@ -143,7 +143,7 @@
 &lt;/configuration&gt;</value>
   </data>
   <data name="CompositeFilesLabel.Help" xml:space="preserve">
-    <value>Composite files are created to reduce the number of files requested by the client, if disabled, versioning will still take place, but the request reduction benefit will be lost.</value>
+    <value>Composite files are combinations of resources created to reduce the number of file requests by the browser.  This will significantly lower the page loading speed. Composite files are required for CSS and JS minification.</value>
   </data>
   <data name="CompositeFilesLabel.Text" xml:space="preserve">
     <value>Enable composite files</value>
@@ -163,15 +163,22 @@
   <data name="ErrorFileRegistration.Text" xml:space="preserve">
     <value>Unable to retrieve the ClientDependency file registration provider section from the web.config. Corresponding admin functions have been disabled.</value>
   </data>
+  <data name="IncrementVersionButton.Confirm" xml:space="preserve">
+    <value>Increasing the current version will change the web.config file and restart the website. This will impact performance while the site relaunches then force browsers to download new copies of the files. Are you sure you want to increment the current version?</value>
+  </data>
   <data name="IncrementVersionButton.Text" xml:space="preserve">
     <value>Increment Version</value>
   </data>
   <data name="Intro.Text" xml:space="preserve">
-    <value>&lt;p&gt;Here you may configure the Client Resource Management settings.&lt;/p&gt;
-&lt;p&gt;If you are in a load-balanced environment please make sure that Url type is set to Base64QueryStrings. For more information about URL types, please visit this link for more information: &lt;a href="http://clientdependency.codeplex.com/wikipage?title=CompositeUrlTypes&amp;referringTitle=Documentation"&gt;CompositeUrlTypes Documentation on CodePlex&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For best performance, it is recommended to enable composite files and also to enable minification of CSS and JavaScript.&lt;/p&gt;
-&lt;p&gt;However, if you run into issues, you may either disable minification, or disable composite files altogether.&lt;/p&gt;
-&lt;p&gt;Also: to disable composite files just for debugging purposes, simply set the web config's debug mode to "true."&lt;/p&gt;</value>
+    <value>&lt;div class="dnnFormMessage dnnFormInfo"&gt;
+  &lt;p&gt;This module provides online management of the Client Resource Management settings.&lt;/p&gt;
+  &lt;p&gt;It is recommended to enable all options for the best performance on a public website.  Disable all options for development environments and debugging.&lt;/p&gt;
+  &lt;p&gt;Please note:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Minification and composite files can present new issues if the source isn't structure properly or the files are combined in the wrong order. Please read &lt;a href="http://www.dotnetnuke.com/Resources/Blogs/EntryId/3207/DNN-6-1-JS-CSS-File-Combination-Potential-Gotchas.aspx"&gt;caveats of minification and composite files&lt;/a&gt; for more information.&lt;/li&gt;
+    &lt;li&gt;Load-balanced environments require Base64QueryStrings URL types. For more information about URL types, please read &lt;a href="http://clientdependency.codeplex.com/wikipage?title=CompositeUrlTypes&amp;referringTitle=Documentation"&gt;CompositeUrlTypes Documentation&lt;/a&gt;.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</value>
   </data>
   <data name="LoggerLabel.Help" xml:space="preserve">
     <value>Specifies the type (Fully qualified class name followed by assembly name) of the Client Dependency logger that is configured.</value>
@@ -180,22 +187,25 @@
     <value>Logger Type</value>
   </data>
   <data name="MinifyCssLabel.Help" xml:space="preserve">
-    <value>CSS minification will be performed upon file combination. Uses custom regular expressions to remove comments, whitespace and "dead css" to reduce file size.</value>
+    <value>CSS minification will reduce the size of the CSS code by using regular expressions to remove comments, whitespace and "dead css".  It is only available when composite files are enabled.</value>
   </data>
   <data name="MinifyCssLabel.Text" xml:space="preserve">
     <value>Minify CSS</value>
   </data>
   <data name="MinifyJsLabel.Help" xml:space="preserve">
-    <value>JS minification will be performed upon file combination. Uses JSMin.</value>
+    <value>JS minification will reduce the size of the JavaScript code using JSMin. It is only available when composite files are enabled.</value>
   </data>
   <data name="MinifyJsLabel.Text" xml:space="preserve">
     <value>Minify JS</value>
   </data>
   <data name="PersistFilesLabel.Help" xml:space="preserve">
-    <value>Persist files will save the combined files in the file system across application restarts. Deleting the files from the file system or incrementing the version are the only way to clear them from the cache.</value>
+    <value>Persist files will save the combined files in the file system across application restarts. This helps to prevent unnecessary server-side processing. Deleting the files from the file system or incrementing the version are the only way to clear them from the cache.</value>
   </data>
   <data name="PersistFilesLabel.Text" xml:space="preserve">
     <value>Persist Files</value>
+  </data>
+  <data name="SaveButton.Confirm" xml:space="preserve">
+    <value>Saving these settings will change the web.config file and restart the website. This will impact performance while the site relaunches. Are you sure you want to save?</value>
   </data>
   <data name="SaveButton.Text" xml:space="preserve">
     <value>Save</value>
@@ -204,7 +214,7 @@
     <value>Settings applied successfully. The web.config has been updated. Please &lt;a href="{0}"&gt;reload this page&lt;/a&gt; to see your changes.</value>
   </data>
   <data name="UrlTypeLabel.Help" xml:space="preserve">
-    <value>Base64QueryStrings is generally the safest option. MappedId leads to better looking URLs, but will not work well in a load balanced environment.</value>
+    <value>MappedID embeds the file details in the file name.  Base64QueryStrings appends the details in the query string. While MappedID creates cleaner URLs, Base64QueryStrings is generally safer because it doesn't rely as much on the file system and required for load balanced environments.</value>
   </data>
   <data name="UrlTypeLabel.Text" xml:space="preserve">
     <value>URL Type</value>
@@ -216,8 +226,7 @@
     <value>ClientDependency Version Incremented</value>
   </data>
   <data name="VersionLabel.Help" xml:space="preserve">
-    <value>The current version of client resources on this server. This version is incremented when an extension is installed, portal.css is updated, or when the cache is cleared. 
-Incrementing the version simply re-creates the combined files (if enabled) and forces the client's browser to download the new version of the files (whether combining is enabled or not).</value>
+    <value>To manage browser caching, client resources are assigned a version number. This number is increased when an extension is installed, portal.css is updated, or when the server cache is cleared.  It applies to any processed file (combined amd/or minified).  You can manually increase the number below to force browsers to download new copies of the resource files.</value>
   </data>
   <data name="VersionLabel.Text" xml:space="preserve">
     <value>Current Version</value>
