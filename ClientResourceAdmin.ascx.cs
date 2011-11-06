@@ -1,7 +1,6 @@
 ﻿namespace ClientResourceAdmin
 {
     using System;
-    using System.Text;
     using System.Xml;
     using System.Xml.XPath;
 
@@ -62,8 +61,8 @@
                 var merge = new DotNetNuke.Services.Installer.XmlMerge(doc, Globals.FormatVersion(app.Version), app.Description);
                 merge.UpdateConfigs();
 
+                LogClientDependencySettingsUpdated();
                 ShowSuccessMsg();
-                LogHostAlertToEventViewer(LocalizeString("ConfigurationUpdate.Title"), string.Format(LocalizeString("ConfigurationUpdate.Message"), GetFormValuesAsString()));
             }
             catch (Exception ex)
             {
@@ -71,15 +70,24 @@
             }
         }
 
-        private string GetFormValuesAsString()
+        private void LogClientDependencySettingsUpdated()
         {
-            var values = new StringBuilder();
-            values.Append("Enable Composite files: " + this.EnableCompositeFiles.Checked.ToString().ToLower() + ", ");
-            values.Append("Minify CSS: " + this.MinifyCss.Checked.ToString().ToLower() + ", ");
-            values.Append("Minify JS: " + this.MinifyJs.Checked.ToString().ToLower() + ", ");
-            values.Append("Persist Files:" + this.PersistFiles.Checked.ToString().ToLower() + ", ");
-            values.Append("Url Type: " + this.UrlTypeList.SelectedValue + ".");
-            return values.ToString();
+            var log = new LogInfo
+                          {
+                              LogUserID = this.UserId,
+                              LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString(),
+                              LogPortalID = this.PortalId,
+                              LogPortalName = this.PortalSettings.PortalName
+                          };
+
+            log.LogProperties.Add(new LogDetailInfo(LocalizeString("ConfigurationUpdate.Title"), LocalizeString("ConfigurationUpdate.Message")));
+            log.LogProperties.Add(new LogDetailInfo("Enable Composite Files", this.EnableCompositeFiles.Checked.ToString().ToLower()));
+            log.LogProperties.Add(new LogDetailInfo("Minify CSS", this.MinifyCss.Checked.ToString().ToLower()));
+            log.LogProperties.Add(new LogDetailInfo("Minify JS", this.MinifyJs.Checked.ToString().ToLower()));
+            log.LogProperties.Add(new LogDetailInfo("Persist Files", this.PersistFiles.Checked.ToString().ToLower()));
+            log.LogProperties.Add(new LogDetailInfo("Url Type", this.UrlTypeList.SelectedValue));
+
+            new EventLogController().AddLog(log);
         }
 
         protected void IncrementVersion(object sender, EventArgs e)
@@ -172,7 +180,7 @@
         {
             new EventLogController().AddLog(title, message, this.PortalSettings, this.UserId, EventLogController.EventLogType.HOST_ALERT);
         }
-
+        
         private void ShowSuccessMsg()
         {
             var message = string.Format(Localization.GetString("Success.Text", this.LocalResourceFile), Globals.NavigateURL());
