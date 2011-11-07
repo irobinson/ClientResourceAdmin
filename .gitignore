@@ -1,7 +1,7 @@
-
 _ReSharper*
 bin/*
 obj/*
 ClientResourceAdmin.suo
 ClientResourceAdmin.csproj.user
 ClientResourceAdmin.6.0.ReSharper.user
+ModulePackages/*
