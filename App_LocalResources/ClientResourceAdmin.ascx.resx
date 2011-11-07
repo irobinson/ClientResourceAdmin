@@ -181,7 +181,7 @@
 &lt;/div&gt;</value>
   </data>
   <data name="LoggerLabel.Help" xml:space="preserve">
-    <value>Specifies the type (Fully qualified class name followed by assembly name) of the Client Dependency logger that is configured.</value>
+    <value>When a logging provider is installed and enabled, it will be listed here. The logging provider makes sure that any issues that arise in the client resource framework are logged to the Event Viewer. An example of an issue that would get logged is when you register a file with the API, but that file doesn't actually exist on the disk.</value>
   </data>
   <data name="LoggerLabel.Text" xml:space="preserve">
     <value>Logger Type</value>
