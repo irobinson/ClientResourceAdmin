@@ -1,7 +1,7 @@
 ﻿Client Resource Admin
 =====================
 
-This is an administrative module for DNN 6.1 that provides a user interface for key settings for managing CSS/JS resources. It allows a DNN SuperUser to update their web.config through the UI instead of editing the web.config by hand.
+This is an administrative module for DNN 6.1 (and up) that provides a user interface for key settings for managing CSS/JS resources. It allows a DNN SuperUser to update their web.config through the UI instead of editing the web.config by hand.
 
 Installation
 ------------
@@ -14,6 +14,8 @@ Usage
 * The module features quite a bit of helpful information about how/why to configure the settings right on the admin page. Make sure to read through the information before saving new changes.
 * Caution: clicking save or increment version in the module will update your web.config and restart your website. Please plan accordingly.
 * Additionally, each time you save changes or increment the version, that information will be written to the DNN Event Viewer so you can keep track of what changes have been made on your site.
+* Disclaimer: if you have made custom changes to the ClientDependency portion of the web.config, they will be overwritten by using this module.
+
 
 Issues
 ------
