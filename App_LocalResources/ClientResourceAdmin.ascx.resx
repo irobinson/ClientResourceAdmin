@@ -117,7 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Basic.Text" xml:space="preserve">
+  <data name="CompositeFilesLabel.Help" xml:space="preserve">
+    <value>Composite files are combinations of resources created to reduce the number of file requests by the browser.  This will significantly lower the page loading speed. Composite files are required for CSS and JS minification.</value>
+  </data>
+  <data name="CompositeFilesLabel.Text" xml:space="preserve">
+    <value>Enable composite files</value>
+  </data>
+  <data name="Config.Text" xml:space="preserve">
+    <value>&lt;configuration&gt;
+  &lt;nodes configfile="Web.config"&gt;
+     
+    &lt;node path="/configuration" action="update" targetpath="/configuration/clientDependency" collision="overwrite"&gt;  &lt;clientDependency version="{0}" fileDependencyExtensions=".js,.css" loggerType="{6}"&gt;
+    &lt;fileRegistration defaultProvider="LoaderControlProvider"&gt;
+      &lt;providers&gt;
+        &lt;add name="DnnPageHeaderProvider" type="DotNetNuke.Web.Client.Providers.DnnPageHeaderProvider, DotNetNuke.Web.Client" enableCompositeFiles="{1}" /&gt;
+        &lt;add name="DnnBodyProvider" type="DotNetNuke.Web.Client.Providers.DnnBodyProvider, DotNetNuke.Web.Client" enableCompositeFiles="{1}" /&gt;
+        &lt;add name="DnnFormBottomProvider" type="DotNetNuke.Web.Client.Providers.DnnFormBottomProvider, DotNetNuke.Web.Client" enableCompositeFiles="{1}" /&gt;
+        &lt;add name="PageHeaderProvider" type="ClientDependency.Core.FileRegistration.Providers.PageHeaderProvider, ClientDependency.Core" enableCompositeFiles="{1}" /&gt;
+        &lt;add name="LazyLoadProvider" type="ClientDependency.Core.FileRegistration.Providers.LazyLoadProvider, ClientDependency.Core" enableCompositeFiles="{1}" /&gt;
+        &lt;add name="LoaderControlProvider" type="ClientDependency.Core.FileRegistration.Providers.LoaderControlProvider, ClientDependency.Core" enableCompositeFiles="{1}" /&gt;
+      &lt;/providers&gt;
+    &lt;/fileRegistration&gt;
+    &lt;compositeFiles defaultFileProcessingProvider="CompositeFileProcessor" compositeFileHandlerPath="~/DependencyHandler.axd"&gt;
+      &lt;fileProcessingProviders&gt;
+        &lt;add name="CompositeFileProcessor" type="ClientDependency.Core.CompositeFiles.Providers.CompositeFileProcessingProvider, ClientDependency.Core" enableCssMinify="{2}" enableJsMinify="{3}" persistFiles="{4}" compositeFilePath="~/App_Data/ClientDependency" bundleDomains="" urlType="{5}" /&gt;
+      &lt;/fileProcessingProviders&gt;
+    &lt;/compositeFiles&gt;
+  &lt;/clientDependency&gt;
+    &lt;/node&gt;
+
+  &lt;/nodes&gt;
+&lt;/configuration&gt;</value>
+  </data>
+  <data name="Config610.Text" xml:space="preserve">
     <value>&lt;configuration&gt;
   &lt;nodes configfile="Web.config"&gt;
      
@@ -141,12 +173,6 @@
 
   &lt;/nodes&gt;
 &lt;/configuration&gt;</value>
-  </data>
-  <data name="CompositeFilesLabel.Help" xml:space="preserve">
-    <value>Composite files are combinations of resources created to reduce the number of file requests by the browser.  This will significantly lower the page loading speed. Composite files are required for CSS and JS minification.</value>
-  </data>
-  <data name="CompositeFilesLabel.Text" xml:space="preserve">
-    <value>Enable composite files</value>
   </data>
   <data name="ConfigurationUpdate.Message" xml:space="preserve">
     <value>The ClientDependency configuration has been updated through the Client Resource Admin. This triggered an application restart. The following values were saved:</value>

@@ -106,7 +106,15 @@
 
         private string GetNewConfig()
         {
-            string xml = Localization.GetString("Basic.Text", this.LocalResourceFile);
+            var dnnVersion = DotNetNuke.Application.DotNetNukeContext.Current.Application.Version;
+
+            var configKey = "Config";
+            if (dnnVersion.Major == 6 && dnnVersion.Minor == 1 && dnnVersion.Build == 0)
+            {
+                configKey = "Config610";
+            }
+
+            string xml = Localization.GetString(configKey, this.LocalResourceFile);
             xml = string.Format(xml,
                 this.Version.Text, // {0}
                 this.EnableCompositeFiles.Checked.ToString().ToLower(), // {1}
