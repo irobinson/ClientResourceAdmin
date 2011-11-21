@@ -68,6 +68,7 @@
     <Compile Include="ClientResourceAdmin.ascx.designer.cs">
       <DependentUpon>ClientResourceAdmin.ascx</DependentUpon>
     </Compile>
+    <Compile Include="DnnFeatureController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +85,9 @@
   <ItemGroup>
     <None Include="ClientResourceAdmin.dnn" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\DnnFeatureController.cs.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

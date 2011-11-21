@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ClientResourceAdmin" type="Module" version="00.00.07">
+    <package name="ClientResourceAdmin" type="Module" version="01.00.00">
       <friendlyName>Client Resource Admin</friendlyName>
       <description>This is an administrative module for DNN 6.1 that provides a user interface for key settings for managing CSS/JS resources. It allows a DNN SuperUser to update their web.config through the UI instead of editing the web.config by hand.</description>
       <owner>
@@ -30,6 +30,12 @@
           <desktopModule>
             <moduleName>ClientResourceAdmin</moduleName>
             <foldername>ClientResourceAdmin</foldername>
+            
+            <businessControllerClass></businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="ClientResourceAdmin.DnnFeatureController, ClientResourceAdmin"></supportedFeature>
+            </supportedFeatures>
+            
             <moduleDefinitions>
               <moduleDefinition>
                 <friendlyName>ClientResourceAdmin</friendlyName>
@@ -49,6 +55,15 @@
               </moduleDefinition>
             </moduleDefinitions>
           </desktopModule>
+          <eventMessage>
+            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+            <processorCommand>UpgradeModule</processorCommand>
+            <attributes>
+              <businessControllerClass>ClientResourceAdmin.DnnFeatureController, ClientResourceAdmin</businessControllerClass>
+              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
+            </attributes>
+          </eventMessage>
         </component>
         <component type="Assembly">
           <assemblies>
